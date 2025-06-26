@@ -11,19 +11,23 @@ export function Navbar() {
 
   const navLinks = [
     {
-      id: "Avaliações",
-      title: "Avaliações",
+      id: "#about",
+      title: "Sobre",
     },
     {
-      id: "Qualidade de trabalho",
+      id: "#menu",
       title: "Qualidade de trabalho",
     },
     {
-      id: "Perguntas frequentes",
+      id: "#testimonials",
+      title: "Avaliações",
+    },
+    {
+      id: "#faq",
       title: "Perguntas frequentes",
     },
     {
-      id: "Contato",
+      id: "#contact",
       title: "Contato",
     },
   ];
@@ -56,7 +60,7 @@ export function Navbar() {
     <nav className=" p-2">
       <div className="  ">
         <Link className="flex items-center gap-2" href={"#home"}>
-          
+
           <p className="text-2xl">Skina Cell</p>
         </Link>
 
