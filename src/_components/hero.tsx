@@ -1,103 +1,156 @@
 "use client"
+import Image from "next/image"
 
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
-import React, { useEffect, useRef } from 'react';
-import { FaPhone, FaWhatsapp } from 'react-icons/fa';
+import { useGSAP } from "@gsap/react"
+import { SplitText, ScrollTrigger } from "gsap/all"
+import gsap from "gsap"
+import { useEffect, useRef } from "react"
+import { useMediaQuery } from "react-responsive"
+import celular from "../../public/videos/celularPicture.png"
 
 
-interface WhatsAppButtonProps {
-  phoneNumber: string; // no formato internacional, ex: 5511999998888
-  message?: string;
-}
+/**
+ * Hero component with GSAP animations
+ * Features:
+ * - Text animations using SplitText
+ * - Leaf animations on scroll
+ * - Video animations on scroll:
+ *   - Scale, opacity, position and rotation changes
+ *   - Play/pause based on scroll position
+ *   - Playback rate control based on scroll progress
+ */
+export function Hero() {
 
-const Hero = ({ phoneNumber, message }: WhatsAppButtonProps) => {
+  const videoRef = useRef<HTMLVideoElement | null>(null)
 
-  const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
-
-  const heroRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    const elements = heroRef.current?.querySelectorAll('.scroll-reveal');
-    elements?.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const isMobile = useMediaQuery({ maxWidth: 767 })
 
 
   useGSAP(() => {
-    gsap.fromTo("#phone", {
-      x: -31,
-      rotation: 0,
-      borderRadius: '0%'
+    // Register ScrollTrigger plugin
+    gsap.registerPlugin(ScrollTrigger)
+    const heroSplit = new SplitText('.title', { type: "chars, words" })
 
-    }, {
-      x: 10,
-      repeat: -1,
-      yoyo: true,
-      borderRadius: '100%',
-      rotation: 360,
-      ease: "bounce.out",
-      duration: 2
+
+    const subTitleSplit = new SplitText(".subtitle", { type: "lines" })
+
+    heroSplit.chars.forEach((char) => char.classList.add("text-gradient"));
+
+    gsap.from(heroSplit.chars, {
+      yPercent: 100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06
     })
+
+    gsap.from(subTitleSplit.lines, {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+      delay: 1
+    })
+
+
+    gsap.from("#celular", {
+      opacity: 0,
+      yPercent: 100,
+      duration: 1.8,
+      ease: "expo.out",
+      stagger: 0.06,
+      delay: 1.5
+    })
+
+
+
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '#hero',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: true,
+      }
+    })
+      .to('.right-leaf', { y: 200 }, 0)
+      .to('.left-leaf', { y: -200 }, 0)
+
+
+    const startValue = isMobile ? "top 50%" : "center 60%"
+
+    const endValue = isMobile ? "120% top" : "bottom top"
+
+    // Create a timeline for video animation on scroll
+    let tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: "video",
+        start: startValue,
+        end: endValue,
+        scrub: true,
+        pin: true,
+      },
+    });
+
+
+    tl.to(videoRef.current, {
+      currentTime: videoRef?.current?.duration,
+    });
+
+
+    // Animate video properties as user scrolls
+
+
+
+
   }, [])
 
 
 
 
 
-
   return (
-    <section id="home" ref={heroRef} className="min-h-screen my-20 flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16">
-      <div className="max-w-7xl mx-auto text-center">
-        <div className="scroll-reveal">
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tighter text-white mb-6">
-            Assistência Premium
-            <span className="block text-blue-400">Para Celulares</span>
-          </h1>
-        </div>
 
-        <div className="scroll-reveal" style={{ transitionDelay: '200ms' }}>
-          <p className="text-xl sm:text-2xl font-light text-white/70 mb-8 max-w-3xl mx-auto leading-relaxed">
-            Serviços profissionais de reparo com mais de 7 anos de experiência no mercado.
-            Restauramos seu dispositivo à perfeita condição com peças premium e expertise artesanal.
-          </p>
-        </div>
+    <>
 
-        <div className="scroll-reveal" style={{ transitionDelay: '400ms' }}>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <button className="neumorphic-btn flex  items-center gap-2 text-white/80 hover:text-white font-light px-8 py-3 border border-white/20 rounded-xl backdrop-blur-sm hover:bg-white/5 transition-all duration-300">
-              <FaPhone className='text-blue-400' id='phone' size={20} />
-              Orçamento Grátis
-            </button>
+      <section id="hero" className="">
+        <h1 className="title">SKINA CELL</h1>
 
-            <a
-              href={`https://wa.me/${11983332724}?text=${"Oiiiiii"}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-green-500 hover:bg-green-600 text-white rounded-lg shadow-md transition"
-            >
-              <FaWhatsapp size={20} />
-              Falar no WhatsApp
-            </a>
+
+
+        <div className="body">
+          <div className="content">
+            <div className="space-y-5 hidden md:block">
+              <p>Assistência Técnica</p>
+              <p className="subtitle text-blue-400">+ SETE anos <br /> no Mercado</p>
+
+            </div>
+            <div className="view-cocktails">
+              <p className="subtitle">
+                Conserto rápido e garantido de celulares. 
+                Qualidade e confiança em um só lugar!
+               
+              </p>
+              <a className="subtitle" href="#cocktails">
+                SKINA CELL - ISAC
+              </a>
+            </div>
 
           </div>
         </div>
 
-      </div>
-    </section>
-  );
-};
+      </section>
 
-export default Hero;
+      <div className=" absolute inset-0">
+        <Image
+
+          id="celular"
+          className="w-full max-w-[400px] md:h-[65%]  absolute md:max-w-[800px]  bottom-0 left-0 md:object-contain object-bottom object-cover lg:max-w-[2000px] lg:"
+
+          alt="Imagem celular"
+          src={celular}
+        />
+      </div>
+    </>
+
+  )
+}

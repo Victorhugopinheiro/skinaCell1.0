@@ -8,6 +8,7 @@ import { GiClick } from 'react-icons/gi';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { CgClose } from 'react-icons/cg';
+import Link from 'next/link';
 
 
 
@@ -31,21 +32,17 @@ const Footer = () => {
     })
   }, [])
 
+  function sendMessage() {
+
+    const text = "Olá vim pelo site e gostaria de saber informações sobre orçamento"
+    const message = encodeURIComponent(text)
+    const phone = "5511983332724"
+
+    window.open(`https://wa.me/${phone}?text=${message}`, "_blank")
+  }
 
 
-  useGSAP(() => {
-    gsap.fromTo("#clock", {
-      y: -20,
 
-
-    }, {
-      y: 20,
-      repeat: -1,
-      yoyo: true,
-      ease: "power1.inOut",
-      duration: 2
-    })
-  }, [])
 
   return (
     <footer id="contact" className="py-16 px-4 sm:px-6 lg:px-8 border-t border-white/10">
@@ -58,7 +55,8 @@ const Footer = () => {
               Restauramos seu dispositivo à perfeita condição com peças de qualidade premium.
             </p>
             <div className="flex gap-4">
-              <button className="neumorphic-btn font-bold">
+              <button onClick={sendMessage} className="neumorphic-btn font-bold">
+
                 Solicitar Orçamento
                 <GiClick id='click' />
               </button>
@@ -69,27 +67,27 @@ const Footer = () => {
             <h3 className="text-white font-medium mb-4">Informações de Contato</h3>
             <div className="space-y-3">
               <div className="flex items-center gap-3">
-                <FaPhone size={18} className="text-blue-400" />
+                <FaPhone size={18} className="text-white" />
                 <span className="text-white/70 font-light">+55 (11) 98333-2724</span>
               </div>
               <div className="flex items-center gap-3">
-                <FaEnvelope size={18} className="text-blue-400" />
+                <FaEnvelope size={18} className="text-white" />
                 <span className="text-white/70 font-light">contato@skinacell.com.br</span>
               </div>
               <div className="flex items-center gap-3">
-                <FaMapPin size={18} className="text-blue-400" />
+                <FaMapPin size={18} className="text-white" />
                 <span className="text-white/70 font-light">R. Wadia Jafete Assad, 160 - Dos Casa, São Bernardo do Campo - SP, 09850-090</span>
               </div>
             </div>
           </div>
 
           <div>
-            <h3 className="text-white font-medium mb-4">Horário de Funcionamento</h3>
+            <h3 className="text-white font-medium mb-4 ">Horário de Funcionamento</h3>
             <div className="space-y-2">
-              <div className="flex items-center gap-3">
-                <FaClock id='clock' size={18} className="text-blue-400" />
+              <div className="flex items-center gap-3  justify-center">
+                <FaClock id='clock' size={18} className="text-white" />
                 <div className="text-white/70 font-light">
-                  <p>Seg - Sex: 10h - 18h</p>
+                  <p>Seg-Sex: 10h - 18h</p>
                   <p>Sábado: 10h - 14h</p>
                   <p>Domingo: Fechado</p>
                 </div>

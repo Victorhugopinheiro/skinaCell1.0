@@ -72,13 +72,13 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <section id="testimonials" ref={sectionRef} className="py-20 px-4 sm:px-6 lg:px-8">
+    <section id="testimonials" ref={sectionRef} className="py-20 min-h-[100vh] flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="scroll-reveal text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-light tracking-tight text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-modern-negra text-white mb-4">
             O Que Nossos Clientes Dizem
           </h2>
-          <p className="text-lg font-light text-white/60">
+          <p className="text-2xl font-modern-negra  text-white/60">
             Resultados reais de clientes satisfeitos
           </p>
         </div>

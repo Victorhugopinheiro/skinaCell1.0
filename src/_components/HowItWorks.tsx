@@ -73,10 +73,10 @@ const HowItWorks = () => {
 
     }, {
       y: 34,
-      repeat: -1,
+      repeat: 2,
       yoyo: true,
-      rotation: 360,
-      ease: "sine.in",
+      
+      ease: "back.out",
       duration: 2
     })
   }, [])
