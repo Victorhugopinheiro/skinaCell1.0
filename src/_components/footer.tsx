@@ -66,17 +66,17 @@ const Footer = () => {
           <div>
             <h3 className="text-white font-medium mb-4">Informações de Contato</h3>
             <div className="space-y-3">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <FaPhone size={18} className="text-white" />
                 <span className="text-white/70 font-light">+55 (11) 98333-2724</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <FaEnvelope size={18} className="text-white" />
                 <span className="text-white/70 font-light">contato@skinacell.com.br</span>
               </div>
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <FaMapPin size={18} className="text-white" />
-                <span className="text-white/70 font-light">R. Wadia Jafete Assad, 160 - Dos Casa, São Bernardo do Campo - SP, 09850-090</span>
+                <span className="text-white/70 font-light max-w-[200px]">R. Wadia Jafete Assad, 160 - Dos Casa, São Bernardo do Campo - SP, 09850-090</span>
               </div>
             </div>
           </div>

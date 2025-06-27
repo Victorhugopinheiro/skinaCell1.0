@@ -83,7 +83,7 @@ export function Menu() {
                 x: -100
             }, {
                 opacity: 1,
-                x: 100,
+                x: 0,
                 duration: 1,
                 ease: "power1.inOut"
             }),
@@ -151,7 +151,7 @@ export function Menu() {
 
 
                 <div className="cocktail">
-                    <Image width={2300} height={2300} src={actualCocktail.image} alt="cocktail-image" className="object-contain mr-64 rounded-md" />
+                    <Image src={actualCocktail.image} alt="cocktail-image" className="object-contain  rounded-md" />
                 </div>
 
 
